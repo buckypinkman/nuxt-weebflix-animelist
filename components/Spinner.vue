@@ -45,9 +45,4 @@
     transform: rotate(360deg);
   }
 }
-@media only screen and (max-width: 500px) {
-  .lds-ring div{
-    left: -21%;
-  }
-}
 </style>
