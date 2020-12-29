@@ -3,6 +3,7 @@
     <h1 class="md:text-3xl text-2xl mb-4">
       Search Results for : {{ $route.params.query }}
     </h1>
+    <Spinner v-if="isLoading" />
     <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
       <anime-list
         v-for="result in results"
@@ -23,10 +24,12 @@ export default {
   data() {
     return {
       results: "",
+      isLoading: false
     };
   },
   methods: {
     async getAnime() {
+      this.isLoading = true
       try {
         const res = await fetch(
           `https://api.jikan.moe/v3/search/anime?q=${this.$route.params.query}&page=1`
@@ -34,6 +37,7 @@ export default {
         const data = await res.json();
         this.results = data.results;
 
+        this.isLoading = false
         console.log(data);
       } catch (err) {
         console.log(err);
