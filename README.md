@@ -1,4 +1,4 @@
-# first-nuxt-app
+# nuxt-weebflix-animelist
 
 ## Build Setup
 
