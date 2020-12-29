@@ -3,7 +3,7 @@
     <h1 class="md:text-3xl text-2xl mb-4">
       Search Results for : {{ $route.params.query }}
     </h1>
-    <Spinner v-if="isLoading" class="mx-auto mt-24"/>
+    <Spinner/>
     <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
       <anime-list
         v-for="result in results"
