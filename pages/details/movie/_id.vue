@@ -5,7 +5,7 @@
     </div>
     <div :class="dynamicStyle">
       <div class="md:flex md:text-left text-center">
-        <Spinner v-if="isLoading"/>
+        <Spinner v-if="isLoading" class="mx-auto md:mx-0"/>
         <img
           :src="res.image_url"
           alt="Poster"
