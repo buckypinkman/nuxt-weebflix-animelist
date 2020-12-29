@@ -1,5 +1,5 @@
 <template>
-  <div class="search-results container mx-auto mt-10 px-5 md:px-0">
+  <div class="search-results container mx-auto mt-7 px-5 md:px-0">
     <h1 class="md:text-3xl text-2xl mb-4">
       Search Results for : {{ $route.params.query }}
     </h1>
