@@ -91,7 +91,7 @@ export default {
         this.res = await res.json();
 
         this.isLoading = false
-        console.log(this.res);
+        // console.log(this.res);
       } catch (err) {
         console.log(err);
       }

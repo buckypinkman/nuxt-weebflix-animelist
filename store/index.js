@@ -20,7 +20,7 @@ const store = () => {
           state.upcoming = data.top;
           
           state.isLoading = false
-          console.log(data);
+          // console.log(data);
   
         } catch (err) {
           console.log(err);
@@ -35,7 +35,7 @@ const store = () => {
           state.airing = data.top;
           
           state.isLoading = false
-          console.log(data);
+          // console.log(data);
   
         } catch (err) {
           console.log(err);
@@ -50,7 +50,7 @@ const store = () => {
           state.topTv = data.top;
   
           state.isLoading = false
-          console.log(data);
+          // console.log(data);
   
         } catch (err) {
           console.log(err);
@@ -65,7 +65,7 @@ const store = () => {
           state.topMovie = data.top;
   
           state.isLoading = false
-          console.log(data);
+          // console.log(data);
   
         } catch (err) {
           console.log(err);

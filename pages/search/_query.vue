@@ -38,7 +38,7 @@ export default {
         this.results = data.results;
 
         this.isLoading = false;
-        console.log(data);
+        // console.log(data);
       } catch (err) {
         console.log(err);
       }

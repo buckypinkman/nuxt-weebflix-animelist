@@ -88,7 +88,7 @@ export default {
         this.date = this.res.aired.string
 
         this.isLoading = false
-        console.log(this.res);
+        // console.log(this.res);
       } catch (err) {
         console.log(err);
       }
