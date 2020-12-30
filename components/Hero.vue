@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="details/tv/40028">
+  <nuxt-link :to="{ name: 'details-tv-id', params: { id: 40028 } }">
     <div class="hero-section mb-8 relative">
       <div class="title md:w-9/12 p-3 md:ml-8 top-2/4 absolute z-10">
         <h2 class="text-4xl md:text-5xl font-bold mb-2">
