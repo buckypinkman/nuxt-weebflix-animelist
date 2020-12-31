@@ -5,12 +5,13 @@
     </div>
     <div :class="dynamicStyle">
       <div class="md:flex md:text-left text-center">
-        <Spinner v-if="isLoading" class="ml-8 md:ml-0"/>
+        <Spinner v-if="isLoading" class="ml-8 md:ml-0" />
         <img
           :src="res.image_url"
           alt="Poster"
           class="rounded shadow-lg details-poster mx-auto md:mx-0"
-          v-else/>
+          v-else
+        />
         <div class="details md:ml-6 md:mt-0 mt-5">
           <h2 class="text-2xl font-semibold">
             <span v-if="res.status == 'Not yet aired'">{{ res.status }}</span>
@@ -41,6 +42,24 @@
         <h1 class="md:text-4xl text-3xl mb-4">Synopsis</h1>
         <p>{{ res.synopsis }}</p>
       </div>
+      <div class="recommendations mt-20">
+        <h1 class="md:text-4xl text-3xl mb-4">Recommendations</h1>
+        <div
+          class="grid grid-cols-2 md:grid-cols-5 gap-6"
+          v-if="recommendedAnime.length > 1"
+        >
+          <anime-list
+            v-for="result in recommendedAnime"
+            :key="result.mal_id"
+            :id="result.mal_id"
+            :poster="result.image_url"
+            :title="result.title"
+          />
+        </div>
+        <h2 class="md:text-xl text-base mb-4" v-else>
+          No recommendation available.
+        </h2>
+      </div>
     </div>
   </div>
 </template>
@@ -51,8 +70,9 @@ export default {
   data() {
     return {
       res: "",
-      date: '',
-      isLoading: false
+      date: "",
+      isLoading: false,
+      recommendedAnime: "",
     };
   },
   head() {
@@ -64,31 +84,45 @@ export default {
         {
           hid: "description",
           name: "description",
-          content: this.res.synopsis ,
+          content: this.res.synopsis,
         },
       ],
     };
   },
   computed: {
-    dynamicStyle() {//minus margin top will be removed if there's no trailer
-      if(this.res.trailer_url != null) {
-        return 'container px-5 md:w-9/12 mx-auto mt-12 md:-mt-16 main-details'
+    dynamicStyle() {
+      //minus margin top will be removed if there's no trailer
+      if (this.res.trailer_url != null) {
+        return "container px-5 md:w-9/12 mx-auto mt-12 md:-mt-16 main-details";
       }
-      return 'container px-5 md:w-9/12 mx-auto mt-12'
-    }
+      return "container px-5 md:w-9/12 mx-auto mt-12";
+    },
   },
   methods: {
     async getDetails() {
-      this.isLoading = true
+      this.isLoading = true;
       try {
         const res = await fetch(
           `https://api.jikan.moe/v3/anime/${this.$route.params.id}`
         );
         this.res = await res.json();
-        this.date = this.res.aired.string
+        this.date = this.res.aired.string;
 
-        this.isLoading = false
+        this.isLoading = false;
         // console.log(this.res);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async getRecommendations() {
+      try {
+        const res = await fetch(
+          `https://api.jikan.moe/v3/anime/${this.$route.params.id}/recommendations`
+        );
+        const data = await res.json();
+        this.recommendedAnime = data.recommendations.slice(0, 20);
+
+        console.log(this.recommendedAnime);
       } catch (err) {
         console.log(err);
       }
@@ -96,6 +130,7 @@ export default {
   },
   created() {
     this.getDetails();
+    this.getRecommendations();
   },
 };
 </script>

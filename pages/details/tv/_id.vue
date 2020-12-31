@@ -45,6 +45,24 @@
         <h1 class="md:text-4xl text-3xl mb-4">Synopsis</h1>
         <p>{{ res.synopsis }}</p>
       </div>
+      <div class="recommendations mt-20">
+        <h1 class="md:text-4xl text-3xl mb-4">Recommendations</h1>
+        <div
+          class="grid grid-cols-2 md:grid-cols-5 gap-6"
+          v-if="recommendedAnime.length > 1"
+        >
+          <anime-list
+            v-for="result in recommendedAnime"
+            :key="result.mal_id"
+            :id="result.mal_id"
+            :poster="result.image_url"
+            :title="result.title"
+          />
+        </div>
+        <h2 class="md:text-xl text-base mb-4" v-else>
+          No recommendation available.
+        </h2>
+      </div>
     </div>
   </div>
 </template>
@@ -56,6 +74,7 @@ export default {
     return {
       res: "",
       isLoading: false,
+      recommendedAnime: ''
     };
   },
   head() {
@@ -96,9 +115,23 @@ export default {
         console.log(err);
       }
     },
+    async getRecommendations() {
+      try {
+        const res = await fetch(
+          `https://api.jikan.moe/v3/anime/${this.$route.params.id}/recommendations`
+        );
+        const data = await res.json();
+        this.recommendedAnime = data.recommendations.slice(0, 20);
+
+        console.log(this.recommendedAnime);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   created() {
     this.getDetails();
+    this.getRecommendations();
   },
 };
 </script>
