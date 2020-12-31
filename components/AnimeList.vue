@@ -20,10 +20,10 @@
           >
         </div>
 
-        <!-- else, return only the score -->
+        <!-- else if, return only the score -->
         <div
           class="p-1 border border-indigo-400 font-semibold absolute top-0 rounded shadow-md text-gray-800 poster"
-          v-else
+          v-else-if="score != null"
         >
           <span class="text-indigo-600">★</span> {{ score }}
         </div>
