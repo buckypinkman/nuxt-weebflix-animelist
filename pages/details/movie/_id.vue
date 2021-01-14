@@ -45,7 +45,7 @@
       <div class="recommendations mt-20">
         <h1 class="md:text-4xl text-3xl mb-4">Recommendations</h1>
         <div
-          class="grid grid-cols-2 md:grid-cols-5 gap-6"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6"
           v-if="recommendedAnime.length > 1"
         >
           <anime-list
@@ -122,7 +122,7 @@ export default {
         const data = await res.json();
         this.recommendedAnime = data.recommendations.slice(0, 20);
 
-        console.log(this.recommendedAnime);
+        // console.log(this.recommendedAnime);
       } catch (err) {
         console.log(err);
       }
